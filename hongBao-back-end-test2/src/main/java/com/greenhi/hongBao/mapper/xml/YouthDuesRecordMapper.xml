@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenhi.hongBao.mapper.YouthDuesRecordMapper">
+    <resultMap id="youthDuesMap" type="com.greenhi.hongBao.entity.YouthDuesRecord">
+        <id column="id" property="id"/>
+        <result column="mid" property="mid"/>
+        <result column="month" property="month"/>
+        <result column="amount" property="amount"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="youth_league_branch" property="branchName"/>
+    </resultMap>
+
+    <select id="getListByBranchName" parameterType="java.lang.String" resultMap= "youthDuesMap">
+        SELECT d.id,d.mid,month,amount,pay_way,d.create_time,d.update_time,youth_league_branch
+        FROM youth_dues_record d
+        INNER JOIN youth_member_info m
+        ON d.mid=m.mid
+        WHERE youth_league_branch=#{branchName}
+    </select>
+
+    <select id="getListByBranchNameAndMonth" resultMap="youthDuesMap">
+        SELECT d.id,d.mid,month,amount,pay_way,d.create_time,d.update_time,youth_league_branch
+        FROM youth_dues_record d
+        INNER JOIN youth_member_info m
+        ON d.mid=m.mid
+        WHERE youth_league_branch=#{branchName} AND month=#{month}
+    </select>
+</mapper>

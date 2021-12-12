@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenhi.hongBao.mapper.PartyDuesRecordMapper">
+
+    <resultMap id="partyDuesMap" type="com.greenhi.hongBao.entity.PartyDuesRecord">
+        <id column="id" property="id"/>
+        <result column="mid" property="mid"/>
+        <result column="month" property="month"/>
+        <result column="amount" property="amount"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="party_branch" property="branchName"/>
+    </resultMap>
+
+
+    <select id="getListByBranchName" parameterType="java.lang.String" resultMap= "partyDuesMap">
+        SELECT d.id,d.mid,month,amount,pay_way,d.create_time,d.update_time,party_branch
+        FROM party_dues_record d
+        INNER JOIN party_member_info m
+        ON d.mid=m.mid
+        WHERE party_branch=#{branchName}
+    </select>
+
+    <select id="getListByBranchNameAndMonth" resultMap="partyDuesMap">
+        SELECT d.id,d.mid,month,amount,pay_way,d.create_time,d.update_time,party_branch
+        FROM party_dues_record d
+        INNER JOIN party_member_info m
+        ON d.mid=m.mid
+        WHERE party_branch=#{branchName} AND month=#{month}
+    </select>
+
+</mapper>

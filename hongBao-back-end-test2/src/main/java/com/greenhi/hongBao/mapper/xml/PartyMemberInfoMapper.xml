@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenhi.hongBao.mapper.PartyMemberInfoMapper">
+
+    <resultMap id="partyMemberInfoMap" type="com.greenhi.hongBao.entity.PartyMemberInfo">
+        <id column="id" property="id"/>
+        <result column="party_branch" property="partyBranch"/>
+    </resultMap>
+
+    <select id="queryBranchNameByMid" resultMap="partyMemberInfoMap">
+        select party_branch
+        from party_member_info
+        where mid=#{mid}
+    </select>
+
+</mapper>
